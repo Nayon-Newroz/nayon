@@ -23,7 +23,7 @@ import work4 from "../assets/images/work4.jpg";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import NavbarDrawer from "./NavbarDrawer";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
   homeContainerStyle: {
     paddingLeft: "0px !important",
     paddingRight: "0px !important",
+  },
+  homeSectionStyle: {
     minHeight: "calc(100vh - 70px)",
     display: "flex !important",
     alignItems: "center",
@@ -47,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
       minHeight: "calc(100vh - 70px)",
     },
   },
+
   BrandNameStyle: {
     fontSize: "30px",
     fontFamily: "'Inter', sans-serif",
@@ -164,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
   pictureHolder: {
     background: "transparent",
     border: "2px solid #fff",
-    width: "330px",
+    width: "330px !important",
     height: "330px",
     margin: "auto",
     borderRadius: "50% 25%",
@@ -550,6 +553,15 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionPaddingRightLeft: {
     padding: "0 50px",
+    [theme.breakpoints.down("xl")]: {
+      padding: "0 200px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      padding: "0 50px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 20px",
+    },
   },
   nameBox: {
     marginBottom: "50px",
@@ -642,18 +654,18 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: "10px",
     },
   },
-  ForOtherVersion:{
+  ForOtherVersion: {
     [theme.breakpoints.down("sm")]: {
-       display:'none'
+      display: "none",
     },
   },
-  ForMobileVersion:{
-    display:'none',
-    textAlign:'right',
+  ForMobileVersion: {
+    display: "none",
+    textAlign: "right",
     [theme.breakpoints.down("sm")]: {
-      display:'block'
-   },
-  }
+      display: "block",
+    },
+  },
 }));
 
 const Home = () => {
@@ -720,21 +732,27 @@ const Home = () => {
   ];
 
   const [active, setActive] = useState("Home");
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const fnActive = (id) => {
+ 
     // setActive(id);
     var elmntToView1 = document.getElementById("menu");
     elmntToView1.scrollIntoView({
       behavior: "smooth",
     });
 
-    const yOffset = -50;
+    const yOffset = -70;
     const element = document.getElementById(id);
     const y =
       element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
     window.scrollTo({ top: y, behavior: "smooth" });
+    if (id === "Contact") {
+      setTimeout(() => {
+        setActive(id);
+      }, 1500);
+    }
   };
 
   useEffect(() => {
@@ -827,12 +845,7 @@ const Home = () => {
                   }`}
                   onClick={() => fnActive("Experience")}
                 >
-                  <p
-                    className={classes.menuItem}
-                
-                  >
-                    Experience
-                  </p>
+                  <p className={classes.menuItem}>Experience</p>
                 </Grid>
 
                 <Grid
@@ -842,12 +855,7 @@ const Home = () => {
                   }`}
                   onClick={() => fnActive("My Works")}
                 >
-                  <p
-                    className={classes.menuItem}
-                
-                  >
-                    My Works
-                  </p>
+                  <p className={classes.menuItem}>My Works</p>
                 </Grid>
                 <Grid
                   item
@@ -856,12 +864,7 @@ const Home = () => {
                   }`}
                   onClick={() => fnActive("Education")}
                 >
-                  <p
-                    className={classes.menuItem}
-                  
-                  >
-                    Education
-                  </p>
+                  <p className={classes.menuItem}>Education</p>
                 </Grid>
                 <Grid
                   item
@@ -870,18 +873,17 @@ const Home = () => {
                   }`}
                   onClick={() => fnActive("Contact")}
                 >
-                  <p
-                    className={classes.menuItem}
-             
-                  >
-                    Contact
-                  </p>
+                  <p className={classes.menuItem}>Contact</p>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={6} sm={9} className={classes.ForMobileVersion}>
-              <MenuIcon fontSize="large" onClick={()=>setOpenDrawer(!openDrawer)} style={{color:'#061A38'}}/>
-          </Grid>
+              <MenuIcon
+                fontSize="large"
+                onClick={() => setOpenDrawer(!openDrawer)}
+                style={{ color: "#061A38" }}
+              />
+            </Grid>
           </Grid>
         </Container>
       </div>
@@ -889,72 +891,70 @@ const Home = () => {
         <Container maxWidth="xl" className={classes.homeContainerStyle}>
           <section
             id="Home"
-            className={classes.sectionPaddingAllSide}
-            style={{
-              width: "100%",
-            }}
+            className={`${classes.sectionPaddingRightLeft} ${classes.homeSectionStyle}`}
+            // style={{
+            //   display: "flex",
+            //   minHeight: "calc(100vh - 70px)",
+            //   alignItems: "center",
+            // }}
           >
-            {/* <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "red",
-            
-            }}
-          > */}
-            <Grid
-              container
-              alignItems="center"
-              justifyContent="center"
-              className={classes.nameBox}
-            >
-              <Grid item sm={12} md={8} className={classes.myInfoBox}>
-                <p className={classes.h1}>My name is Nayon.</p>
-                <p className={classes.h1}>I am a React.js Developer.</p>
-                <br />
-                <br />
-                <div className={classes.designationStyle}>
-                  <p className={classes.h3}>
-                    Jr. Developer at ABCD Technologies Limited
-                  </p>
-                </div>
-              </Grid>
-              <Grid item sm={12} md={4} className={classes.myImageBox}>
-                <Grid
-                  container
-                  alignItems="center"
-                  justifyContent="center"
-                  className={classes.pictureHolder}
-                >
-                  <div className={classes.pictureBox}>
-                    <img src={nayon} alt="" width="100%" />
+            <div style={{ width: "100%" }}>
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="center"
+                className={classes.nameBox}
+              >
+                <Grid item sm={12} md={8} className={classes.myInfoBox}>
+                  <p className={classes.h1}>My name is Nayon.</p>
+                  <p className={classes.h1}>I am a React.js Developer.</p>
+                  <br />
+                  <br />
+                  <div className={classes.designationStyle}>
+                    <p className={classes.h3}>
+                      Jr. Developer at ABCD Technologies Limited
+                    </p>
                   </div>
                 </Grid>
+                <Grid item sm={12} md={4} className={classes.myImageBox}>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="center"
+                    className={classes.pictureHolder}
+                  >
+                    <div className={classes.pictureBox}>
+                      <img src={nayon} alt="" width="100%" />
+                    </div>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
 
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                  Develop For
-                </p>
-                <p className={classes.h4}>Web Application</p>
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Grid item>
+                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
+                    Develop For
+                  </p>
+                  <p className={classes.h4}>Web Application</p>
+                </Grid>
+                <Grid item style={{ textAlign: "right" }}>
+                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
+                    Phone
+                  </p>
+                  <p className={classes.h4}>(+880) 01793 66 15 17</p>
+                </Grid>
+                <Grid item style={{ textAlign: "right" }}>
+                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
+                    Drop your Message
+                  </p>
+                  <p className={classes.h4}>mahnayon@gmail.com</p>
+                </Grid>
               </Grid>
-              <Grid item style={{ textAlign: "right" }}>
-                <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                  Phone
-                </p>
-                <p className={classes.h4}>(+880) 01793 66 15 17</p>
-              </Grid>
-              <Grid item style={{ textAlign: "right" }}>
-                <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                  Drop your Message
-                </p>
-                <p className={classes.h4}>mahnayon@gmail.com</p>
-              </Grid>
-            </Grid>
-            {/* </div> */}
+            </div>
           </section>
         </Container>
       </div>
@@ -1283,16 +1283,12 @@ const Home = () => {
         </Container>
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <NavbarDrawer openDrawer={openDrawer} fnActive={fnActive} active={active}/>
+       
+      <NavbarDrawer
+        openDrawer={openDrawer}
+        fnActive={fnActive}
+        active={active}
+      />
     </div>
   );
 };
