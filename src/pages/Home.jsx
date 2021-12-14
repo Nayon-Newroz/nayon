@@ -25,6 +25,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavbarDrawer from "./NavbarDrawer";
+import WhatIKnow from "./WhatIKnow";
 
 const useStyles = makeStyles((theme) => ({
   themeBackground: {
@@ -735,7 +736,6 @@ const Home = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const fnActive = (id) => {
- 
     // setActive(id);
     var elmntToView1 = document.getElementById("menu");
     elmntToView1.scrollIntoView({
@@ -1038,6 +1038,10 @@ const Home = () => {
               </div>
             </Grid>
           </Grid>
+          <div>
+            <p className={classes.cardTitle}> Also I learnt</p>
+            <WhatIKnow />
+          </div>
         </section>
       </Container>
       <Container
@@ -1238,7 +1242,7 @@ const Home = () => {
                     11/A, 19/28, Dhaka, Bangladesh
                   </p>
                   <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    youremail@gmail.com
+                    mahnayon@gmail.com
                   </p>
                   <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
                     (+880) 1793 66 15 17
@@ -1283,7 +1287,6 @@ const Home = () => {
         </Container>
       </div>
 
-       
       <NavbarDrawer
         openDrawer={openDrawer}
         fnActive={fnActive}
