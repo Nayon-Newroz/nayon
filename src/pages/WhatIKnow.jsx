@@ -71,6 +71,7 @@ const WhatIKnow = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
+    swipeToSlide: true,
     speed: 2000,
     autoplaySpeed: 2000,
     centerMode: true,

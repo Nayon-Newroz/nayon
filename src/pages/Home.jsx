@@ -27,9 +27,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NavbarDrawer from "./NavbarDrawer";
 import WhatIKnow from "./WhatIKnow";
 
+import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Fade";
+import Pulse from "react-reveal/Pulse";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const useStyles = makeStyles((theme) => ({
   themeBackground: {
-    background: "#5AFF80",
+    background: "#061A38",
+    // background: "#2b2741",
     boxShadow: "rgb(17 17 26 / 2%) 0px 15px 20px",
   },
   homeContainerStyle: {
@@ -40,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "calc(100vh - 70px)",
     display: "flex !important",
     alignItems: "center",
+    position: "relative",
     [theme.breakpoints.down("lg")]: {
       minHeight: "700px",
     },
@@ -57,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     margin: 0,
 
-    color: "#061A38",
+    color: "#E3E56D",
     // [theme.breakpoints.down("xl")]: {
     //   fontSize: "45px",
     //   lineHeight: "65px",
@@ -68,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     margin: 0,
     lineHeight: "80px",
-    color: "#061A38",
+    color: "#E3E56D",
     [theme.breakpoints.down("xl")]: {
       fontSize: "45px",
       lineHeight: "65px",
@@ -85,15 +94,34 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     margin: "0px 0px 50px 0px",
     color: "#061A38",
+    position: "relative",
+
+    "&:after": {
+      content: "''",
+      position: "absolute",
+      top: 5,
+      left: 0,
+      width: "120px",
+      height: "100%",
+      // transform: "scale(0)",
+      // background: "black",
+      borderBottom: "3px solid #E3E56D",
+    },
     [theme.breakpoints.down("xl")]: {
       margin: "0px 0px 35px 0px",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "32px",
-      margin: "0px 0px 15px 0px",
+      margin: "0px 0px 25px 0px",
+      "&:after": {
+        width: "80px",
+      },
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: "24px",
+      "&:after": {
+        width: "50px",
+      },
     },
   },
   h3: {
@@ -101,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Inter', sans-serif",
     fontWeight: 300,
     margin: 0,
-    color: "#061A38",
+    color: "#E3E56D",
     [theme.breakpoints.down("md")]: {
       fontSize: "20px",
     },
@@ -172,10 +200,12 @@ const useStyles = makeStyles((theme) => ({
     height: "330px",
     margin: "auto",
     borderRadius: "50% 25%",
-    [theme.breakpoints.down("md")]: {
-      borderRadius: "50%",
+    [theme.breakpoints.down("xl")]: {
       width: "260px !important",
       height: "260px",
+    },
+    [theme.breakpoints.down("md")]: {
+      borderRadius: "50%",
     },
     [theme.breakpoints.down("sm")]: {
       width: "180px !important",
@@ -187,10 +217,12 @@ const useStyles = makeStyles((theme) => ({
     height: "300px",
     overflow: "hidden",
     borderRadius: "50% 25%",
-    [theme.breakpoints.down("md")]: {
-      borderRadius: "50%",
+    [theme.breakpoints.down("xl")]: {
       width: "230px",
       height: "230px",
+    },
+    [theme.breakpoints.down("md")]: {
+      borderRadius: "50%",
     },
     [theme.breakpoints.down("sm")]: {
       borderRadius: "50%",
@@ -258,11 +290,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     margin: 0,
-    color: "#5AFF80",
+    color: "#E3E56D",
     cursor: "pointer",
     padding: "0px 0px 8px 0px",
     display: "inline-block",
-    borderBottom: "2px solid #5AFF80",
+    borderBottom: "2px solid #E3E56D",
     transition: ".5s",
     "&:hover": {
       letterSpacing: "1px",
@@ -276,7 +308,8 @@ const useStyles = makeStyles((theme) => ({
   },
   navbarStyle: {
     height: "70px",
-    background: "#5AFF80",
+    background: "#061A38",
+    // background: "#E3E56D",
     // borderRadius: "16px 16px 0px 0px",
 
     bottom: 0,
@@ -289,7 +322,8 @@ const useStyles = makeStyles((theme) => ({
     // fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     margin: 0,
-    color: "#061A38",
+    color: "#E3E56D",
+    // color: "#061A38",
     position: "relative",
     padding: "5px 20px",
     zIndex: 2,
@@ -325,7 +359,7 @@ const useStyles = makeStyles((theme) => ({
       // background: "black",
       transition: ".5s",
       zIndex: -1,
-      border: "1px solid #061A38",
+      border: "1px solid #E3E56D",
       borderRadius: "10px",
     },
     "&:hover:after": {
@@ -399,7 +433,7 @@ const useStyles = makeStyles((theme) => ({
     //   fontWeight: 600,
     // },
     // borderBottom: "2px solid black",
-    border: "2px solid #061A38",
+    border: "2px solid #E3E56D",
     borderRadius: "10px",
   },
 
@@ -461,17 +495,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    border: "1px solid #061A38",
+    border: "1px solid #E3E56D",
     padding: "20px",
     borderRadius: "10px",
     fontSize: "26px",
     fontFamily: "'Inter', sans-serif",
     textDecoration: "none",
-    color: "#061A38",
+    color: "#E3E56D",
     cursor: "pointer",
     transition: ".5s",
     "&:hover": {
-      background: "#061A3850",
+      background: "#E3E56D50",
     },
     marginRight: "20px",
     [theme.breakpoints.down("md")]: {
@@ -483,14 +517,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   button2: {
-    border: "1px solid #061A38",
+    border: "1px solid #E3E56D",
     padding: "20px",
     borderRadius: "10px",
     fontSize: "26px",
     fontFamily: "'Inter', sans-serif",
-    color: "#fff",
+    color: "#061A38",
     cursor: "pointer",
-    background: "#061A38",
+    background: "#E3E56D",
     [theme.breakpoints.down("md")]: {
       fontSize: "16px",
     },
@@ -502,7 +536,7 @@ const useStyles = makeStyles((theme) => ({
   iconDiv: {
     width: "40px",
     height: "40px",
-    border: "1px solid #061A38",
+    border: "1px solid #E3E56D",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -518,7 +552,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   iconStyle: {
-    color: "#061A38",
+    color: "#E3E56D",
     fontSize: "25px !important",
     [theme.breakpoints.down("md")]: {
       fontSize: "18px !important",
@@ -615,42 +649,42 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   borderStyle1: {
-    borderRight: "1px solid #5AFF80",
-    borderBottom: "1px solid #5AFF80",
+    borderRight: "1px solid #E3E56D",
+    borderBottom: "1px solid #E3E56D",
     [theme.breakpoints.down("sm")]: {
-      borderLeft: "1px solid #5AFF80",
-      borderTop: "1px solid #5AFF80",
+      borderLeft: "1px solid #E3E56D",
+      borderTop: "1px solid #E3E56D",
       marginBottom: "10px !important",
       borderRadius: "10px",
     },
   },
   borderStyle2: {
-    borderBottom: "1px solid #5AFF80",
+    borderBottom: "1px solid #E3E56D",
     [theme.breakpoints.down("sm")]: {
-      borderRight: "1px solid #5AFF80",
-      borderLeft: "1px solid #5AFF80",
-      borderTop: "1px solid #5AFF80",
+      borderRight: "1px solid #E3E56D",
+      borderLeft: "1px solid #E3E56D",
+      borderTop: "1px solid #E3E56D",
       marginBottom: "10px !important",
       borderRadius: "10px",
     },
   },
   borderStyle3: {
-    borderRight: "1px solid #5AFF80",
+    borderRight: "1px solid #E3E56D",
 
     [theme.breakpoints.down("sm")]: {
-      borderLeft: "1px solid #5AFF80",
-      borderTop: "1px solid #5AFF80",
-      borderBottom: "1px solid #5AFF80",
+      borderLeft: "1px solid #E3E56D",
+      borderTop: "1px solid #E3E56D",
+      borderBottom: "1px solid #E3E56D",
       marginBottom: "10px !important",
       borderRadius: "10px",
     },
   },
   borderStyle4: {
     [theme.breakpoints.down("sm")]: {
-      borderRight: "1px solid #5AFF80",
-      borderLeft: "1px solid #5AFF80",
-      borderTop: "1px solid #5AFF80",
-      borderBottom: "1px solid #5AFF80",
+      borderRight: "1px solid #E3E56D",
+      borderLeft: "1px solid #E3E56D",
+      borderTop: "1px solid #E3E56D",
+      borderBottom: "1px solid #E3E56D",
       marginBottom: "10px !important",
       borderRadius: "10px",
     },
@@ -667,6 +701,11 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
+  // gridMargin: {
+  //   [theme.breakpoints.down("sm")]: {
+  //     marginTop: 50,
+  //   },
+  // },
 }));
 
 const Home = () => {
@@ -733,6 +772,7 @@ const Home = () => {
   ];
 
   const [active, setActive] = useState("Home");
+  const [reload, setReload] = useState(0);
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const fnActive = (id) => {
@@ -757,6 +797,7 @@ const Home = () => {
 
   useEffect(() => {
     const sections = document.querySelectorAll("section");
+    let lastId = active;
     document.addEventListener("scroll", () => {
       const scrollCheck = window.scrollY;
       // console.log("scrollCheck", scrollCheck);
@@ -764,23 +805,30 @@ const Home = () => {
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 70;
         // console.log("sectionTop", sectionTop, sectionTop-50);
-        // const sectionHeight = section.clientHeight;
-        // console.log("sectionHeight", sectionHeight);
 
-        if (scrollCheck >= sectionTop) {
+        const sectionHeight = section.clientHeight;
+        const sectionBottom = sectionTop + sectionHeight;
+        if (scrollCheck >= sectionTop && scrollCheck <= sectionBottom) {
           sectionId = section.getAttribute("id");
-          setActive(sectionId);
-          // console.log("sectionId", sectionId);
+          if (lastId !== sectionId) {
+            lastId = sectionId;
+            setActive(sectionId);
+            // console.log("sectionId", sectionId);
+          }
         }
       });
     });
 
     // console.log("body", window.screen.availHeight);
   }, []);
-  // useEffect(() => {
-  //   setActive("Home");
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    setReload(reload + 1);
+    AOS.init({
+      // offset: 200,
+      duration: 1000,
+      // anchorPlacement: "top-bottom",
+    });
+  }, []);
   return (
     <div>
       <div
@@ -788,7 +836,7 @@ const Home = () => {
         style={{
           paddingLeft: "0px",
           paddingRight: "0px",
-          position: "sticky ",
+          position: "sticky",
           top: 0,
           zIndex: 20,
         }}
@@ -881,348 +929,120 @@ const Home = () => {
               <MenuIcon
                 fontSize="large"
                 onClick={() => setOpenDrawer(!openDrawer)}
-                style={{ color: "#061A38" }}
+                style={{ color: "#E3E56D" }}
               />
             </Grid>
           </Grid>
         </Container>
       </div>
-      <div className={classes.themeBackground}>
-        <Container maxWidth="xl" className={classes.homeContainerStyle}>
-          <section
-            id="Home"
-            className={`${classes.sectionPaddingRightLeft} ${classes.homeSectionStyle}`}
-            // style={{
-            //   display: "flex",
-            //   minHeight: "calc(100vh - 70px)",
-            //   alignItems: "center",
-            // }}
-          >
-            <div style={{ width: "100%" }}>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="center"
-                className={classes.nameBox}
-              >
-                <Grid item sm={12} md={8} className={classes.myInfoBox}>
-                  <p className={classes.h1}>My name is Nayon.</p>
-                  <p className={classes.h1}>I am a React.js Developer.</p>
-                  <br />
-                  <br />
-                  <div className={classes.designationStyle}>
-                    <p className={classes.h3}>
-                      Jr. Developer at ABCD Technologies Limited
-                    </p>
-                  </div>
-                </Grid>
-                <Grid item sm={12} md={4} className={classes.myImageBox}>
-                  <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="center"
-                    className={classes.pictureHolder}
-                  >
-                    <div className={classes.pictureBox}>
-                      <img src={nayon} alt="" width="100%" />
-                    </div>
+      <div style={{ overflowX: "hidden" }}>
+        <div className={classes.themeBackground}>
+          <Container maxWidth="xl" className={classes.homeContainerStyle}>
+            <section
+              id="Home"
+              className={`${classes.sectionPaddingRightLeft} ${classes.homeSectionStyle}`}
+            >
+              {/* <div
+                style={{
+                  position: "absolute",
+                  height: "200px",
+                  width: "3px",
+                  background: "red",
+                  top: 0,
+                  // left: "-50px",
+                }}
+              ></div> */}
+              <div style={{ width: "100%" }}>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="center"
+                  className={classes.nameBox}
+                >
+                  <Grid item sm={12} md={8} className={classes.myInfoBox}>
+                    <Fade left cascade enter spy={reload}>
+                      <div>
+                        <p className={classes.h1}>My name is Nayon.</p>
+
+                        <p className={classes.h1}>I am a React.js Developer.</p>
+
+                        <br />
+                        <br />
+                        <div className={classes.designationStyle}>
+                          <p className={classes.h3}>
+                            Jr. Developer at ABCD Technologies Limited
+                          </p>
+                        </div>
+                      </div>
+                    </Fade>
+                  </Grid>
+                  <Grid item sm={12} md={4} className={classes.myImageBox}>
+                    <Fade right spy={reload}>
+                      <Grid
+                        container
+                        alignItems="center"
+                        justifyContent="center"
+                        className={classes.pictureHolder}
+                      >
+                        <div className={classes.pictureBox}>
+                          <img src={nayon} alt="" width="100%" />
+                        </div>
+                      </Grid>
+                    </Fade>
                   </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Grid item>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    Develop For
-                  </p>
-                  <p className={classes.h4}>Web Application</p>
-                </Grid>
-                <Grid item style={{ textAlign: "right" }}>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    Phone
-                  </p>
-                  <p className={classes.h4}>(+880) 01793 66 15 17</p>
-                </Grid>
-                <Grid item style={{ textAlign: "right" }}>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    Drop your Message
-                  </p>
-                  <p className={classes.h4}>mahnayon@gmail.com</p>
-                </Grid>
-              </Grid>
-            </div>
-          </section>
-        </Container>
-      </div>
-
-      <Container
-        maxWidth="xl"
-        style={{
-          paddingLeft: "0px",
-          paddingRight: "0px",
-        }}
-      >
-        <section id="Experties" className={classes.sectionPaddingWithoutBottom}>
-          <p className={classes.h2}>My Experties</p>
-          <Grid container>
-            <Grid item sm={6} className={classes.borderStyle1}>
-              <div className={classes.card}>
-                <div className={classes.cardImage}>
-                  <img src={Image1} alt="" width="100%" />
-                </div>
-                <p className={classes.cardTitle}> Strategy & Direction</p>
-                <p className={classes.cardDetail}>
-                  {" "}
-                  Understand First. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.
-                </p>
-                <div className={classes.cardButton}>
-                  Head of design at Calvino
-                </div>
-              </div>
-            </Grid>
-            <Grid item sm={6} className={classes.borderStyle2}>
-              <div className={classes.card}>
-                <div className={classes.cardImage}>
-                  <img src={Image1} alt="" width="100%" />
-                </div>
-                <p className={classes.cardTitle}> Strategy & Direction</p>
-                <p className={classes.cardDetail}>
-                  {" "}
-                  Understand First. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.
-                </p>
-                <div className={classes.cardButton}>
-                  Head of design at Calvino
-                </div>
-              </div>
-            </Grid>
-            <Grid item sm={6} className={classes.borderStyle3}>
-              <div className={classes.card}>
-                <div className={classes.cardImage}>
-                  <img src={Image1} alt="" width="100%" />
-                </div>
-                <p className={classes.cardTitle}> Strategy & Direction</p>
-                <p className={classes.cardDetail}>
-                  {" "}
-                  Understand First. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.
-                </p>
-                <div className={classes.cardButton}>
-                  Head of design at Calvino
-                </div>
-              </div>
-            </Grid>
-            <Grid item sm={6} className={classes.borderStyle4}>
-              <div className={classes.card}>
-                <div className={classes.cardImage}>
-                  <img src={Image1} alt="" width="100%" />
-                </div>
-                <p className={classes.cardTitle}> Strategy & Direction</p>
-                <p className={classes.cardDetail}>
-                  {" "}
-                  Understand First. Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.
-                </p>
-                <div className={classes.cardButton}>
-                  Head of design at Calvino
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-          <div>
-            <p className={classes.cardTitle}> Also I learnt</p>
-            <WhatIKnow />
-          </div>
-        </section>
-      </Container>
-      <Container
-        maxWidth="xl"
-        style={{
-          paddingLeft: "0px",
-          paddingRight: "0px",
-        }}
-      >
-        <section
-          id="Experience"
-          className={classes.sectionPaddingWithoutBottom}
-        >
-          <p className={classes.h2}>Experience</p>
-          <div className={classes.experienceBox}>
-            {experienceData.map((item, i) => (
-              <div className={classes.cardBox} key={i}>
-                <div className={classes.card}>
-                  <div className={classes.cardTitleBox}>
-                    <Grid
-                      container
-                      alignItems="center"
-                      style={{ marginBottom: 24 }}
-                    >
-                      <Grid item xs={6}>
-                        <div className={classes.cardTitleMargin}>
-                          <p className={classes.h3} style={{ fontWeight: 400 }}>
-                            {" "}
-                            {item.designation}
-                          </p>
-                        </div>
-
-                        <p className={classes.cardDetail} style={{ margin: 0 }}>
-                          {" "}
-                          {item.duration}
-                        </p>
-                      </Grid>
-                      <Grid item xs={6} style={{ textAlign: "right" }}>
-                        <p className={classes.h5} style={{ color: "#061A38" }}>
-                          <span style={{ color: "#AAB7B8" }}>at</span>{" "}
-                          {item.company}
-                        </p>
-                      </Grid>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                  className={classes.gridMargin}
+                >
+                  <Fade bottom spy={reload}>
+                    <Grid item>
+                      <p
+                        className={`${classes.h5} ${classes.marginBottomStyle}`}
+                        style={{ color: "#E3E56D" }}
+                      >
+                        Develop For
+                      </p>
+                      <p className={classes.h4} style={{ color: "#E3E56D" }}>
+                        Web Application
+                      </p>
                     </Grid>
-                  </div>
-                  <p className={classes.cardDetail}>{item.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </Container>
-
-      <Container
-        maxWidth="xl"
-        style={{
-          paddingLeft: "0px",
-          paddingRight: "0px",
-        }}
-      >
-        <section id="My Works" className={classes.sectionPaddingWithoutBottom}>
-          <p className={classes.h2}>My Works</p>
-          <div className={classes.NotCard}>
-            <Grid container spacing={4}>
-              <Grid item xs={6}>
-                <div className={classes.workDivStyle}>
-                  <div className={classes.workHoverDiv}>
-                    <div className={classes.workHoverDivText}>
+                  </Fade>
+                  <Fade bottom spy={reload}>
+                    <Grid item style={{ textAlign: "right" }}>
                       <p
-                        className={classes.h5}
-                        style={{ letterSpacing: "2px" }}
+                        className={`${classes.h5} ${classes.marginBottomStyle}`}
+                        style={{ color: "#E3E56D" }}
                       >
-                        E-Commerce
+                        Phone
                       </p>
-                      <p className={classes.workCardText}>DailyShop247.com</p>
-                    </div>
-                  </div>
-                  <img src={work1} alt="" height="100%" width="100%" />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.workDivStyle}>
-                  <div className={classes.workHoverDiv}>
-                    <div className={classes.workHoverDivText}>
-                      <p
-                        className={classes.h5}
-                        style={{ letterSpacing: "2px" }}
-                      >
-                        E-Commerce
+                      <p className={classes.h4} style={{ color: "#E3E56D" }}>
+                        (+880) 01793 66 15 17
                       </p>
-                      <p className={classes.workCardText}>DailyShop247.com</p>
-                    </div>
-                  </div>
-                  <img src={work2} alt="" height="100%" width="100%" />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.workDivStyle}>
-                  <div className={classes.workHoverDiv}>
-                    <div className={classes.workHoverDivText}>
-                      <p
-                        className={classes.h5}
-                        style={{ letterSpacing: "2px" }}
-                      >
-                        E-Commerce
-                      </p>
-                      <p className={classes.workCardText}>DailyShop247.com</p>
-                    </div>
-                  </div>
-                  <img src={work3} alt="" height="100%" width="100%" />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.workDivStyle}>
-                  <div className={classes.workHoverDiv}>
-                    <div className={classes.workHoverDivText}>
-                      <p
-                        className={classes.h5}
-                        style={{ letterSpacing: "2px" }}
-                      >
-                        E-Commerce
-                      </p>
-                      <p className={classes.workCardText}>DailyShop247.com</p>
-                    </div>
-                  </div>
-                  <img src={work4} alt="" height="100%" width="100%" />
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        </section>
-      </Container>
-
-      <Container
-        maxWidth="xl"
-        style={{
-          paddingLeft: "0px",
-          paddingRight: "0px",
-        }}
-      >
-        <section id="Education" className={classes.sectionPaddingWithoutBottom}>
-          <p className={classes.h2}>Education</p>
-          <div className={classes.experienceBox}>
-            {educationData.map((item, i) => (
-              <div className={classes.cardBox} key={i}>
-                <div className={classes.card}>
-                  <div className={classes.cardTitleBox}>
-                    <Grid
-                      container
-                      alignItems="center"
-                      style={{ marginBottom: 24 }}
-                    >
-                      <Grid item xs={6}>
-                        <div className={classes.cardTitleMargin}>
-                          <p className={classes.h3} style={{ fontWeight: 400 }}>
-                            {" "}
-                            {item.subject}
-                          </p>
-                        </div>
-                        <p className={classes.cardDetail} style={{ margin: 0 }}>
-                          {" "}
-                          {item.session}
-                        </p>
-                      </Grid>
-                      <Grid item xs={6} style={{ textAlign: "right" }}>
-                        <p className={classes.h5}>
-                          <span style={{ color: "#AAB7B8" }}>at</span>{" "}
-                          {item.institute}
-                        </p>
-                      </Grid>
                     </Grid>
-                  </div>
-                  <p className={classes.cardDetail}>{item.detail}</p>
-                </div>
+                  </Fade>
+                  <Fade bottom spy={reload}>
+                    <Grid item style={{ textAlign: "right" }}>
+                      <p
+                        className={`${classes.h5} ${classes.marginBottomStyle}`}
+                        style={{ color: "#E3E56D" }}
+                      >
+                        Drop your Message
+                      </p>
+                      <p className={classes.h4} style={{ color: "#E3E56D" }}>
+                        mahnayon@gmail.com
+                      </p>
+                    </Grid>
+                  </Fade>
+                </Grid>
               </div>
-            ))}
-          </div>
-        </section>
-      </Container>
+            </section>
+          </Container>
+        </div>
 
-      <div className={classes.themeBackground}>
         <Container
           maxWidth="xl"
           style={{
@@ -1230,61 +1050,513 @@ const Home = () => {
             paddingRight: "0px",
           }}
         >
-          <section id="Contact" className={classes.sectionPaddingAllSide}>
-            <p className={classes.h2}>Contact Me</p>
-            <div
-              className={classes.NotCard}
-              style={{ paddingTop: "0px", paddingBottom: "0px" }}
-            >
-              <Grid container alignItems="center">
-                <Grid item xs={12} sm={6}>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    11/A, 19/28, Dhaka, Bangladesh
-                  </p>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    mahnayon@gmail.com
-                  </p>
-                  <p className={`${classes.h5} ${classes.marginBottomStyle}`}>
-                    (+880) 1793 66 15 17
-                  </p>
-                  <Grid container alignItems="center">
-                    <div className={classes.iconDiv}>
-                      <FacebookIcon className={classes.iconStyle} />
-                    </div>
-                    <div className={classes.iconDiv}>
-                      <InstagramIcon className={classes.iconStyle} />
-                    </div>
-                    <div className={classes.iconDiv}>
-                      <LinkedInIcon className={classes.iconStyle} />
-                    </div>
-                  </Grid>
-                </Grid>
-                <Grid item xs={12} sm={6} className={classes.contactButtonBox}>
-                  <a
-                    className={classes.button}
-                    // href="https://drive.google.com/file/d/17vtjYpam6cbCyTaZYz1MmHedR3wJSYJp/view?usp=sharing"
-                    // target="_blank"
-                    href="/Nayon.pdf"
-                    download
-                  >
-                    Download CV
-                  </a>
-                  {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+          <section
+            id="Experties"
+            className={classes.sectionPaddingWithoutBottom}
+          >
+            <p className={classes.h2}>My Experties</p>
 
-                  <a
-                    className={classes.button2}
-                    href="https://www.messenger.com/t/100032252721687"
-                    target="_blank"
-                    style={{ textDecoration: "none", color: "#fff" }}
+            <Grid container>
+              <Grid item sm={6}>
+                {/* <Fade left spy={reload}> */}
+                <div className={classes.borderStyle1} data-aos="fade-down">
+                  {/* <div className={classes.borderStyle1}> */}
+                  <div className={classes.card}>
+                    <div className={classes.cardImage}>
+                      <img src={Image1} alt="" width="100%" />
+                    </div>
+                    <p className={classes.cardTitle}> Strategy & Direction</p>
+                    <p className={classes.cardDetail}>
+                      {" "}
+                      Understand First. Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
+                    </p>
+                    <div className={classes.cardButton}>
+                      Head of design at Calvino
+                    </div>
+                  </div>
+                </div>
+                {/* </Fade> */}
+              </Grid>
+
+              <Grid item sm={6}>
+                {/* <Fade right spy={reload}> */}
+                <div className={classes.borderStyle2} data-aos="fade-left">
+                  {/* <div className={classes.borderStyle2}> */}
+                  <div className={classes.card}>
+                    <div className={classes.cardImage}>
+                      <img src={Image1} alt="" width="100%" />
+                    </div>
+                    <p className={classes.cardTitle}> Strategy & Direction</p>
+                    <p className={classes.cardDetail}>
+                      {" "}
+                      Understand First. Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
+                    </p>
+                    <div className={classes.cardButton}>
+                      Head of design at Calvino
+                    </div>
+                  </div>
+                </div>
+                {/* </Fade> */}
+              </Grid>
+
+              <Grid item sm={6}>
+                {/* <Fade left spy={reload}> */}
+                <div className={classes.borderStyle3} data-aos="fade-up">
+                  {/* <div className={classes.borderStyle3}> */}
+                  <div className={classes.card}>
+                    <div className={classes.cardImage}>
+                      <img src={Image1} alt="" width="100%" />
+                    </div>
+                    <p className={classes.cardTitle}> Strategy & Direction</p>
+                    <p className={classes.cardDetail}>
+                      {" "}
+                      Understand First. Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
+                    </p>
+                    <div className={classes.cardButton}>
+                      Head of design at Calvino
+                    </div>
+                  </div>
+                </div>
+                {/* </Fade> */}
+              </Grid>
+
+              <Grid item sm={6}>
+                {/* <Fade right spy={reload}> */}
+                <div className={classes.borderStyle4} data-aos="fade-right">
+                  {/* <div className={classes.borderStyle4}> */}
+                  <div className={classes.card}>
+                    <div className={classes.cardImage}>
+                      <img src={Image1} alt="" width="100%" />
+                    </div>
+                    <p className={classes.cardTitle}> Strategy & Direction</p>
+                    <p className={classes.cardDetail}>
+                      {" "}
+                      Understand First. Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
+                    </p>
+                    <div className={classes.cardButton}>
+                      Head of design at Calvino
+                    </div>
+                  </div>
+                </div>
+                {/* </Fade> */}
+              </Grid>
+            </Grid>
+
+            <div>
+              <p className={classes.cardTitle}> Also I learnt</p>
+              <WhatIKnow />
+            </div>
+          </section>
+        </Container>
+
+        <Container
+          maxWidth="xl"
+          style={{
+            paddingLeft: "0px",
+            paddingRight: "0px",
+          }}
+        >
+          <section
+            id="Experience"
+            className={classes.sectionPaddingWithoutBottom}
+          >
+            <p className={classes.h2}>Experience</p>
+            <div className={classes.experienceBox}>
+              {experienceData.map((item, i) =>
+                i % 2 === 0 ? (
+                  // <Fade enter left key={i} spy={reload}>
+                  <div
+                    className={classes.cardBox}
+                    key={i}
+                    data-aos="fade-right"
                   >
-                    {" "}
-                    Let's Talk
-                  </a>
+                    {/* <div className={classes.cardBox} key={i}> */}
+                    <div className={classes.card}>
+                      <div className={classes.cardTitleBox}>
+                        <Grid
+                          container
+                          alignItems="center"
+                          style={{ marginBottom: 24 }}
+                        >
+                          <Grid item xs={6}>
+                            <div className={classes.cardTitleMargin}>
+                              <p
+                                className={classes.h3}
+                                style={{ fontWeight: 400 }}
+                              >
+                                {" "}
+                                {item.designation}
+                              </p>
+                            </div>
+
+                            <p
+                              className={classes.cardDetail}
+                              style={{ margin: 0 }}
+                            >
+                              {" "}
+                              {item.duration}
+                            </p>
+                          </Grid>
+                          <Grid item xs={6} style={{ textAlign: "right" }}>
+                            <p
+                              className={classes.h5}
+                              style={{ color: "#061A38" }}
+                            >
+                              <span style={{ color: "#AAB7B8" }}>at</span>{" "}
+                              {item.company}
+                            </p>
+                          </Grid>
+                        </Grid>
+                      </div>
+                      <p className={classes.cardDetail}>{item.detail}</p>
+                    </div>
+                  </div>
+                ) : (
+                  // </Fade>
+                  // <Fade enter right key={i} spy={reload}>
+                  <div className={classes.cardBox} key={i} data-aos="fade-left">
+                    {/* <div className={classes.cardBox} key={i}> */}
+                    <div className={classes.card}>
+                      <div className={classes.cardTitleBox}>
+                        <Grid
+                          container
+                          alignItems="center"
+                          style={{ marginBottom: 24 }}
+                        >
+                          <Grid item xs={6}>
+                            <div className={classes.cardTitleMargin}>
+                              <p
+                                className={classes.h3}
+                                style={{ fontWeight: 400 }}
+                              >
+                                {" "}
+                                {item.designation}
+                              </p>
+                            </div>
+
+                            <p
+                              className={classes.cardDetail}
+                              style={{ margin: 0 }}
+                            >
+                              {" "}
+                              {item.duration}
+                            </p>
+                          </Grid>
+                          <Grid item xs={6} style={{ textAlign: "right" }}>
+                            <p
+                              className={classes.h5}
+                              style={{ color: "#061A38" }}
+                            >
+                              <span style={{ color: "#AAB7B8" }}>at</span>{" "}
+                              {item.company}
+                            </p>
+                          </Grid>
+                        </Grid>
+                      </div>
+                      <p className={classes.cardDetail}>{item.detail}</p>
+                    </div>
+                  </div>
+                  // </Fade>
+                )
+              )}
+            </div>
+          </section>
+        </Container>
+
+        <Container
+          maxWidth="xl"
+          style={{
+            paddingLeft: "0px",
+            paddingRight: "0px",
+          }}
+        >
+          <section
+            id="My Works"
+            className={classes.sectionPaddingWithoutBottom}
+          >
+            <p className={classes.h2}>My Works</p>
+            <div className={classes.NotCard}>
+              <Grid container spacing={4}>
+                <Grid item xs={6}>
+                  {/* <Pulse spy={reload}> */}
+                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                    {/* <div className={classes.workDivStyle}> */}
+                    <div className={classes.workHoverDiv}>
+                      <div className={classes.workHoverDivText}>
+                        <p
+                          className={classes.h5}
+                          style={{ letterSpacing: "2px" }}
+                        >
+                          E-Commerce
+                        </p>
+                        <p className={classes.workCardText}>DailyShop247.com</p>
+                      </div>
+                    </div>
+                    <img src={work1} alt="" height="100%" width="100%" />
+                  </div>
+                  {/* </Pulse> */}
+                </Grid>
+                <Grid item xs={6}>
+                  {/* <Pulse spy={reload}> */}
+                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                    {/* <div className={classes.workDivStyle}> */}
+                    <div className={classes.workHoverDiv}>
+                      <div className={classes.workHoverDivText}>
+                        <p
+                          className={classes.h5}
+                          style={{ letterSpacing: "2px" }}
+                        >
+                          E-Commerce
+                        </p>
+                        <p className={classes.workCardText}>DailyShop247.com</p>
+                      </div>
+                    </div>
+                    <img src={work2} alt="" height="100%" width="100%" />
+                  </div>
+                  {/* </Pulse> */}
+                </Grid>
+                <Grid item xs={6}>
+                  {/* <Pulse spy={reload}> */}
+                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                    {/* <div className={classes.workDivStyle}> */}
+                    <div className={classes.workHoverDiv}>
+                      <div className={classes.workHoverDivText}>
+                        <p
+                          className={classes.h5}
+                          style={{ letterSpacing: "2px" }}
+                        >
+                          E-Commerce
+                        </p>
+                        <p className={classes.workCardText}>DailyShop247.com</p>
+                      </div>
+                    </div>
+                    <img src={work3} alt="" height="100%" width="100%" />
+                  </div>
+                  {/* </Pulse> */}
+                </Grid>
+                <Grid item xs={6}>
+                  {/* <Pulse spy={reload} > */}
+                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                    {/* <div className={classes.workDivStyle}> */}
+                    <div className={classes.workHoverDiv}>
+                      <div className={classes.workHoverDivText}>
+                        <p
+                          className={classes.h5}
+                          style={{ letterSpacing: "2px" }}
+                        >
+                          E-Commerce
+                        </p>
+                        <p className={classes.workCardText}>DailyShop247.com</p>
+                      </div>
+                    </div>
+                    <img src={work4} alt="" height="100%" width="100%" />
+                  </div>
+                  {/* </Pulse> */}
                 </Grid>
               </Grid>
             </div>
           </section>
         </Container>
+
+        <Container
+          maxWidth="xl"
+          style={{
+            paddingLeft: "0px",
+            paddingRight: "0px",
+          }}
+        >
+          <section
+            id="Education"
+            className={classes.sectionPaddingWithoutBottom}
+          >
+            <p className={classes.h2}>Education</p>
+            <div className={classes.experienceBox}>
+              {educationData.map((item, i) =>
+                i % 2 === 0 ? (
+                  // <Fade left key={i} spy={reload}>
+                  <div
+                    className={classes.cardBox}
+                    key={i}
+                    data-aos="fade-right"
+                  >
+                    {/* <div className={classes.cardBox} key={i}> */}
+                    <div className={classes.card}>
+                      <div className={classes.cardTitleBox}>
+                        <Grid
+                          container
+                          alignItems="center"
+                          style={{ marginBottom: 24 }}
+                        >
+                          <Grid item xs={6}>
+                            <div className={classes.cardTitleMargin}>
+                              <p
+                                className={classes.h3}
+                                style={{ fontWeight: 400 }}
+                              >
+                                {" "}
+                                {item.subject}
+                              </p>
+                            </div>
+                            <p
+                              className={classes.cardDetail}
+                              style={{ margin: 0 }}
+                            >
+                              {" "}
+                              {item.session}
+                            </p>
+                          </Grid>
+                          <Grid item xs={6} style={{ textAlign: "right" }}>
+                            <p className={classes.h5}>
+                              <span style={{ color: "#AAB7B8" }}>at</span>{" "}
+                              {item.institute}
+                            </p>
+                          </Grid>
+                        </Grid>
+                      </div>
+                      <p className={classes.cardDetail}>{item.detail}</p>
+                    </div>
+                  </div>
+                ) : (
+                  // </Fade>
+                  // <Fade right key={i} spy={reload}>
+                  <div className={classes.cardBox} key={i} data-aos="fade-left">
+                    {/* <div className={classes.cardBox} key={i}> */}
+                    <div className={classes.card}>
+                      <div className={classes.cardTitleBox}>
+                        <Grid
+                          container
+                          alignItems="center"
+                          style={{ marginBottom: 24 }}
+                        >
+                          <Grid item xs={6}>
+                            <div className={classes.cardTitleMargin}>
+                              <p
+                                className={classes.h3}
+                                style={{ fontWeight: 400 }}
+                              >
+                                {" "}
+                                {item.subject}
+                              </p>
+                            </div>
+                            <p
+                              className={classes.cardDetail}
+                              style={{ margin: 0 }}
+                            >
+                              {" "}
+                              {item.session}
+                            </p>
+                          </Grid>
+                          <Grid item xs={6} style={{ textAlign: "right" }}>
+                            <p className={classes.h5}>
+                              <span style={{ color: "#AAB7B8" }}>at</span>{" "}
+                              {item.institute}
+                            </p>
+                          </Grid>
+                        </Grid>
+                      </div>
+                      <p className={classes.cardDetail}>{item.detail}</p>
+                    </div>
+                  </div>
+                  // </Fade>
+                )
+              )}
+            </div>
+          </section>
+        </Container>
+
+        <div className={classes.themeBackground}>
+          <Container
+            maxWidth="xl"
+            style={{
+              paddingLeft: "0px",
+              paddingRight: "0px",
+            }}
+          >
+            <section id="Contact" className={classes.sectionPaddingAllSide}>
+              <p className={classes.h2} style={{ color: "#E3E56D" }}>
+                Contact Me
+              </p>
+              <div
+                className={classes.NotCard}
+                style={{ paddingTop: "0px", paddingBottom: "0px" }}
+              >
+                <Grid container alignItems="center">
+                  <Grid item xs={12} sm={6}>
+                    <p
+                      className={`${classes.h5} ${classes.marginBottomStyle}`}
+                      style={{ color: "#fff" }}
+                    >
+                      11/A, 19/28, Dhaka, Bangladesh
+                    </p>
+                    <p
+                      className={`${classes.h5} ${classes.marginBottomStyle}`}
+                      style={{ color: "#fff" }}
+                    >
+                      mahnayon@gmail.com
+                    </p>
+                    <p
+                      className={`${classes.h5} ${classes.marginBottomStyle}`}
+                      style={{ color: "#fff" }}
+                    >
+                      (+880) 1793 66 15 17
+                    </p>
+                    <Grid container alignItems="center">
+                      <div className={classes.iconDiv}>
+                        <FacebookIcon className={classes.iconStyle} />
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <InstagramIcon className={classes.iconStyle} />
+                      </div>
+                      <div className={classes.iconDiv}>
+                        <LinkedInIcon className={classes.iconStyle} />
+                      </div>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    className={classes.contactButtonBox}
+                  >
+                    {/* <Fade right> */}
+
+                    <div data-aos="zoom-in">
+                      <a
+                        className={classes.button}
+                        // href="https://drive.google.com/file/d/17vtjYpam6cbCyTaZYz1MmHedR3wJSYJp/view?usp=sharing"
+                        // target="_blank"
+                        href="/Nayon.pdf"
+                        download
+                      >
+                        Download CV
+                      </a>
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+
+                      <a
+                        className={classes.button2}
+                        href="https://www.messenger.com/t/100032252721687"
+                        target="_blank"
+                        style={{ textDecoration: "none", color: "#061A38" }}
+                      >
+                        {" "}
+                        Let's Talk
+                      </a>
+                    </div>
+                    {/* </Fade> */}
+                  </Grid>
+                </Grid>
+              </div>
+            </section>
+          </Container>
+        </div>
       </div>
 
       <NavbarDrawer

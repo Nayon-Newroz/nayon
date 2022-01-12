@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     margin: 0,
 
-    color: "#061A38",
+    color: "#E3E56D",
     // [theme.breakpoints.down("xl")]: {
     //   fontSize: "45px",
     //   lineHeight: "65px",
@@ -33,11 +33,12 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTypography-root": {
       fontSize: "18px",
       fontWeight: 500,
-      color: "#061A38",
+      color: "#E3E56D",
     },
   },
   active: {
-    background: "#5AFF8080 !important",
+    // background: "#5AFF8080 !important",
+    background: "#262D54 !important",
     borderRadius: "10px !important",
   },
 }));
@@ -96,7 +97,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Home")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>Home</ListItemText>
@@ -109,7 +110,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Experties")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <SurfingIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
@@ -124,7 +125,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Experience")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <AcUnitIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
@@ -138,7 +139,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("My Works")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <GrainIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
@@ -152,7 +153,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Education")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <SchoolIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
@@ -166,7 +167,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Contact")}
         >
-          <ListItemIcon>
+          <ListItemIcon style={{ color: "#E3E56D" }}>
             <ContactsIcon />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>Contact</ListItemText>
@@ -191,6 +192,11 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
+            PaperProps={{
+              sx: {
+                backgroundColor: "#061A38",
+              },
+            }}
           >
             {list(anchor)}
           </SwipeableDrawer>
