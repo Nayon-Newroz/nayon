@@ -639,7 +639,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   contactButtonBox: {
-    minHeight: "100px",
+    // minHeight: "1000px",
     textAlign: "center",
     [theme.breakpoints.down("md")]: {
       textAlign: "right",
@@ -1526,10 +1526,11 @@ const Home = () => {
                     xs={12}
                     sm={6}
                     className={classes.contactButtonBox}
+                    data-aos="zoom-in"
                   >
                     {/* <Fade right> */}
 
-                    <div data-aos="zoom-in">
+                    <div style={{ background: "", minHeight: "70px" }}>
                       <a
                         className={classes.button}
                         // href="https://drive.google.com/file/d/17vtjYpam6cbCyTaZYz1MmHedR3wJSYJp/view?usp=sharing"
@@ -1538,7 +1539,7 @@ const Home = () => {
                         download
                       >
                         Download CV
-                      </a> 
+                      </a>
 
                       <a
                         className={classes.button2}
@@ -1551,6 +1552,8 @@ const Home = () => {
                       </a>
                     </div>
                     {/* </Fade> */}
+                    <br />
+                    <br />
                   </Grid>
                 </Grid>
               </div>
