@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Inter', sans-serif",
     fontWeight: 300,
     margin: 0,
-    color: "#E3E56D",
+    color: "#061A38",
     [theme.breakpoints.down("md")]: {
       fontSize: "20px",
     },
@@ -514,6 +514,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "10px",
       padding: "10px 15px",
+      marginRight: "0px",
     },
   },
   button2: {
@@ -530,7 +531,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: "10px",
-      padding: "10px 15px",
+      padding: "10px 25px",
     },
   },
   iconDiv: {
@@ -645,7 +646,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "right",
     },
     [theme.breakpoints.down("sm")]: {
-      textAlign: "left",
+      textAlign: "right",
       marginTop: "20px !important",
     },
   },
@@ -861,7 +862,7 @@ const Home = () => {
                 <Grid item>
                   {/* <img src={logo} alt="" height="40px" /> */}
                 </Grid>
-                <Grid item>
+                <Grid item onClick={() => fnActive("Home")}>
                   <p className={classes.BrandNameStyle}>NAYON</p>
                 </Grid>
               </Grid>
@@ -943,16 +944,6 @@ const Home = () => {
               id="Home"
               className={`${classes.sectionPaddingRightLeft} ${classes.homeSectionStyle}`}
             >
-              {/* <div
-                style={{
-                  position: "absolute",
-                  height: "200px",
-                  width: "3px",
-                  background: "red",
-                  top: 0,
-                  // left: "-50px",
-                }}
-              ></div> */}
               <div style={{ width: "100%" }}>
                 <Grid
                   container
@@ -970,7 +961,10 @@ const Home = () => {
                         <br />
                         <br />
                         <div className={classes.designationStyle}>
-                          <p className={classes.h3}>
+                          <p
+                            className={classes.h3}
+                            style={{ color: "#E3E56D" }}
+                          >
                             Jr. Developer at ABCD Technologies Limited
                           </p>
                         </div>
@@ -1490,7 +1484,7 @@ const Home = () => {
                 style={{ paddingTop: "0px", paddingBottom: "0px" }}
               >
                 <Grid container alignItems="center">
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={6} sm={6}>
                     <p
                       className={`${classes.h5} ${classes.marginBottomStyle}`}
                       style={{ color: "#fff" }}
@@ -1523,14 +1517,14 @@ const Home = () => {
                   </Grid>
                   <Grid
                     item
-                    xs={12}
+                    xs={6}
                     sm={6}
                     className={classes.contactButtonBox}
                     data-aos="zoom-in"
                   >
                     {/* <Fade right> */}
 
-                    <div style={{ background: "", minHeight: "70px" }}>
+                    <div>
                       <a
                         className={classes.button}
                         // href="https://drive.google.com/file/d/17vtjYpam6cbCyTaZYz1MmHedR3wJSYJp/view?usp=sharing"
@@ -1540,7 +1534,8 @@ const Home = () => {
                       >
                         Download CV
                       </a>
-
+                      <br className={classes.ForMobileVersion} />
+                      <br className={classes.ForMobileVersion} />
                       <a
                         className={classes.button2}
                         href="https://www.messenger.com/t/100032252721687"
