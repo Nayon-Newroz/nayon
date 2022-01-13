@@ -639,6 +639,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   contactButtonBox: {
+    minHeight: "100px",
     textAlign: "center",
     [theme.breakpoints.down("md")]: {
       textAlign: "right",
@@ -1537,8 +1538,7 @@ const Home = () => {
                         download
                       >
                         Download CV
-                      </a>
-                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+                      </a> 
 
                       <a
                         className={classes.button2}

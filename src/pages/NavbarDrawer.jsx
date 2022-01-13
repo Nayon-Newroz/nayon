@@ -86,7 +86,7 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           className={`${classes.itemStyle}   `}
           onClick={() => fnActive("Home")}
         >
-          <p className={`${classes.BrandNameStyle}`}>Nayon</p>
+          <p className={`${classes.BrandNameStyle}`}>NAYON</p>
         </ListItem>
         <Divider />
         <br />
