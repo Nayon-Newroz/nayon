@@ -993,7 +993,7 @@ const Home = () => {
                   justifyContent="space-between"
                   className={classes.gridMargin}
                 >
-                  <Fade bottom spy={reload}>
+                  <Fade delay={4000} bottom spy={reload}>
                     <Grid item>
                       <p
                         className={`${classes.h5} ${classes.marginBottomStyle}`}
@@ -1006,7 +1006,7 @@ const Home = () => {
                       </p>
                     </Grid>
                   </Fade>
-                  <Fade bottom spy={reload}>
+                  <Fade delay={3000} bottom spy={reload}>
                     <Grid item style={{ textAlign: "right" }}>
                       <p
                         className={`${classes.h5} ${classes.marginBottomStyle}`}
@@ -1019,7 +1019,7 @@ const Home = () => {
                       </p>
                     </Grid>
                   </Fade>
-                  <Fade bottom spy={reload}>
+                  <Fade delay={2000} bottom spy={reload}>
                     <Grid item style={{ textAlign: "right" }}>
                       <p
                         className={`${classes.h5} ${classes.marginBottomStyle}`}
