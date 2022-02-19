@@ -33,6 +33,7 @@ import Pulse from "react-reveal/Pulse";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Email from "./Email";
 
 const useStyles = makeStyles((theme) => ({
   themeBackground: {
@@ -1552,6 +1553,11 @@ const Home = () => {
                   </Grid>
                 </Grid>
               </div>
+              <br />
+              <br />
+              <br />
+          
+              <Email />
             </section>
           </Container>
         </div>
