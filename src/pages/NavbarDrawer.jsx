@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     "& .MuiTypography-root": {
-      fontSize: "18px",
+      fontSize: "13px",
       fontWeight: 500,
       color: "#E3E56D",
     },
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px !important",
   },
 }));
+
 
 export default function NavbarDrawer({ openDrawer, fnActive, active }) {
   const classes = useStyles();
@@ -97,8 +98,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Home")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <HomeIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <HomeIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>Home</ListItemText>
         </ListItem>
@@ -110,8 +111,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Experties")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <SurfingIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <SurfingIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
             Experties
@@ -125,8 +126,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Experience")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <AcUnitIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <AcUnitIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
             Experience
@@ -139,8 +140,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("My Works")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <GrainIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <GrainIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
             My Works
@@ -153,8 +154,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Education")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <SchoolIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <SchoolIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>
             Education
@@ -167,8 +168,8 @@ export default function NavbarDrawer({ openDrawer, fnActive, active }) {
           }`}
           onClick={() => fnActive("Contact")}
         >
-          <ListItemIcon style={{ color: "#E3E56D" }}>
-            <ContactsIcon />
+          <ListItemIcon style={{ color: "#E3E56D", minWidth: "35px" }}>
+            <ContactsIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText className={`${classes.menuItem}`}>Contact</ListItemText>
         </ListItem>

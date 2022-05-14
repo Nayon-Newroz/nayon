@@ -19,6 +19,9 @@ import work1 from "../assets/images/work1.jpg";
 import work2 from "../assets/images/work2.jpg";
 import work3 from "../assets/images/work3.jpg";
 import work4 from "../assets/images/work4.jpg";
+import NewrozImage from "../assets/images/NewrozImage.png";
+import PaymentIntegration from "../assets/images/Payment-Integration.png";
+import CartSystem from "../assets/images/CartSystem.png";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -30,6 +33,8 @@ import WhatIKnow from "./WhatIKnow";
 import Fade from "react-reveal/Fade";
 import Zoom from "react-reveal/Fade";
 import Pulse from "react-reveal/Pulse";
+
+import TextTransition, { presets } from "react-text-transition";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -464,6 +469,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20px",
     overflow: "hidden",
     position: "relative",
+    cursor: "pointer",
     [theme.breakpoints.down("xl")]: {
       height: "250px",
     },
@@ -715,9 +721,9 @@ const Home = () => {
   const classes = useStyles();
   const experienceData = [
     {
-      designation: "Strategy & Direction",
-      duration: "March 2020 - Present",
-      company: "ABCD Tech Ltd.",
+      designation: "Frontend Developer (React Js)",
+      duration: "May 2021 - Present",
+      company: "Newroz Technologies Limited.",
       detail:
         "Understand First. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Understand First. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
@@ -831,15 +837,38 @@ const Home = () => {
       duration: 1000,
       // anchorPlacement: "top-bottom",
     });
+    // ==================================================
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-80px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }, []);
+  const TEXTS = ["React.js Developer.", "Web Designer", "Frontend Developer"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(
+      () => setIndex((index) => index + 1),
+      3000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
   }, []);
   return (
     <div>
       <div
+        id="navbar"
         className={classes.themeBackground}
         style={{
           paddingLeft: "0px",
           paddingRight: "0px",
           position: "sticky",
+          transition: "0.3s",
           top: 0,
           zIndex: 20,
         }}
@@ -955,9 +984,22 @@ const Home = () => {
                   <Grid item sm={12} md={8} className={classes.myInfoBox}>
                     <Fade left cascade enter spy={reload}>
                       <div>
-                        <p className={classes.h1}>My name is Nayon.</p>
+                        <h1></h1>
+                        <p className={classes.h1}>Hi, I am Nayon Hossain.</p>
 
-                        <p className={classes.h1}>I am a React.js Developer.</p>
+                        <p
+                          className={classes.h1}
+                          style={{ color: "#fff", fontWeight: 400 }}
+                        >
+                          I am a{" "}
+                          <TextTransition
+                            text={TEXTS[index % TEXTS.length]}
+                            springConfig={presets.wobbly}
+                            inline={true}
+                            noOverflow={true}
+                            // delay={3000}
+                          />
+                        </p>
 
                         <br />
                         <br />
@@ -966,7 +1008,7 @@ const Home = () => {
                             className={classes.h3}
                             style={{ color: "#E3E56D" }}
                           >
-                            Jr. Developer at ABCD Technologies Limited
+                            Jr. Developer at Newroz Technologies Limited
                           </p>
                         </div>
                       </div>
@@ -1147,7 +1189,7 @@ const Home = () => {
             </Grid>
 
             <div>
-              <p className={classes.cardTitle}> Also I learnt</p>
+              <p className={classes.cardTitle}> MY SKILLS</p>
               <WhatIKnow />
             </div>
           </section>
@@ -1283,59 +1325,81 @@ const Home = () => {
               <Grid container spacing={4}>
                 <Grid item xs={6}>
                   {/* <Pulse spy={reload}> */}
-                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
-                    {/* <div className={classes.workDivStyle}> */}
-                    <div className={classes.workHoverDiv}>
-                      <div className={classes.workHoverDivText}>
-                        <p
-                          className={classes.h5}
-                          style={{ letterSpacing: "2px" }}
-                        >
-                          E-Commerce
-                        </p>
-                        <p className={classes.workCardText}>DailyShop247.com</p>
+                  <a href="https://www.newroztech.com/" target="_blank">
+                    <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                      {/* <div className={classes.workDivStyle}> */}
+                      <div className={classes.workHoverDiv}>
+                        <div className={classes.workHoverDivText}>
+                          <p
+                            className={classes.h5}
+                            style={{ letterSpacing: "2px" }}
+                          >
+                            IT Services and IT Consulting Company
+                          </p>
+                          <p className={classes.workCardText}>
+                            www.newroztech.com
+                          </p>
+                        </div>
                       </div>
+                      <img
+                        src={NewrozImage}
+                        alt=""
+                        height="100%"
+                        width="100%"
+                      />
                     </div>
-                    <img src={work1} alt="" height="100%" width="100%" />
-                  </div>
+                  </a>
                   {/* </Pulse> */}
                 </Grid>
                 <Grid item xs={6}>
                   {/* <Pulse spy={reload}> */}
-                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
-                    {/* <div className={classes.workDivStyle}> */}
-                    <div className={classes.workHoverDiv}>
-                      <div className={classes.workHoverDivText}>
-                        <p
-                          className={classes.h5}
-                          style={{ letterSpacing: "2px" }}
-                        >
-                          E-Commerce
-                        </p>
-                        <p className={classes.workCardText}>DailyShop247.com</p>
+                  <a href="https://developer.fast-pay.iq/" target="_blank">
+                    <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                      {/* <div className={classes.workDivStyle}> */}
+                      <div className={classes.workHoverDiv}>
+                        <div className={classes.workHoverDivText}>
+                          <p
+                            className={classes.h5}
+                            style={{ letterSpacing: "2px" }}
+                          >
+                            Payment Integration API
+                          </p>
+                          <p className={classes.workCardText}>
+                            https://developer.fast-pay.iq
+                          </p>
+                        </div>
                       </div>
+                      <img
+                        src={PaymentIntegration}
+                        alt=""
+                        height="100%"
+                        width="100%"
+                      />
                     </div>
-                    <img src={work2} alt="" height="100%" width="100%" />
-                  </div>
+                  </a>
                   {/* </Pulse> */}
                 </Grid>
                 <Grid item xs={6}>
                   {/* <Pulse spy={reload}> */}
-                  <div className={classes.workDivStyle} data-aos="zoom-in-up">
-                    {/* <div className={classes.workDivStyle}> */}
-                    <div className={classes.workHoverDiv}>
-                      <div className={classes.workHoverDivText}>
-                        <p
-                          className={classes.h5}
-                          style={{ letterSpacing: "2px" }}
-                        >
-                          E-Commerce
-                        </p>
-                        <p className={classes.workCardText}>DailyShop247.com</p>
+                  <a href="https://fastpay-ecom.netlify.app/" target="_blank">
+                    <div className={classes.workDivStyle} data-aos="zoom-in-up">
+                      {/* <div className={classes.workDivStyle}> */}
+                      <div className={classes.workHoverDiv}>
+                        <div className={classes.workHoverDivText}>
+                          <p
+                            className={classes.h5}
+                            style={{ letterSpacing: "2px" }}
+                          >
+                            E-Commerce Cart System
+                          </p>
+                          <p className={classes.workCardText}>
+                            https://fastpay-ecom.netlify.app/
+                          </p>
+                        </div>
                       </div>
+                      <img src={CartSystem} alt="" height="100%" width="100%" />
                     </div>
-                    <img src={work3} alt="" height="100%" width="100%" />
-                  </div>
+                  </a>
                   {/* </Pulse> */}
                 </Grid>
                 <Grid item xs={6}>
@@ -1556,7 +1620,7 @@ const Home = () => {
               <br />
               <br />
               <br />
-          
+
               <Email />
             </section>
           </Container>

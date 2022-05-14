@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#061A38",
     cursor: "pointer",
     background: "#E3E56D",
+    minWidth: "400px",
+    display: "block",
+    margin: "auto",
     [theme.breakpoints.down("md")]: {
       fontSize: "16px",
     },
